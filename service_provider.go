@@ -16,10 +16,10 @@ func (this ServiceProvider) Start() error {
 }
 
 func (this ServiceProvider) Register(container contracts.Application) {
-	container.Singleton("encryption", func(config contracts.Config) contracts.EncryptorFactory {
+	container.Singleton("encryption", func(config contracts.Config, env contracts.Env) contracts.EncryptorFactory {
 		factory := &Factory{encryptors: make(map[string]contracts.Encryptor)}
 
-		factory.Extend("default", AES(config.GetString("app.key")))
+		factory.Extend("default", AES(env.GetString("app.key")))
 
 		return factory
 	})

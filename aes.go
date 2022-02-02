@@ -6,6 +6,7 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"github.com/goal-web/contracts"
+	"github.com/pkg/errors"
 )
 
 type aesEncryptor struct {
@@ -44,7 +45,18 @@ func (this *aesEncryptor) Encode(value string) string {
 	return base64.StdEncoding.EncodeToString(encrypted)
 }
 
-func (this *aesEncryptor) Decode(encrypted string) (string, error) {
+func (this *aesEncryptor) Decode(encrypted string) (result string, err error) {
+	defer func() {
+		if panicValue := recover(); panicValue != nil {
+			switch value := panicValue.(type) {
+			case error:
+				err = value
+			default:
+				err = errors.Errorf("%v", value)
+			}
+		}
+
+	}()
 	// 转成字节数组
 	encryptedByte, err := base64.StdEncoding.DecodeString(encrypted)
 	if err != nil {
