@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 goos: darwin
 goarch: amd64
 pkg: github.com/goal-web/encryption/tests
