@@ -17,8 +17,8 @@ BenchmarkAES-4   	 1773345	       633.8 ns/op
 func BenchmarkAES(b *testing.B) {
 	aes := encryption.AES("123456781234567812345678")
 	for i := 0; i < b.N; i++ {
-		encrypted := aes.Encode("goal")
-		_, _ = aes.Decode(encrypted)
+		encrypted := aes.Encrypt([]byte("goal"))
+		_, _ = aes.Decrypt(encrypted)
 
 	}
 }
