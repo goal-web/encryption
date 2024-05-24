@@ -3,9 +3,6 @@ module github.com/goal-web/encryption
 go 1.20
 
 require (
-	github.com/goal-web/application v0.3.0
-	github.com/goal-web/contracts v0.3.0
-	github.com/goal-web/supports v0.3.0
 	github.com/pkg/errors v0.9.1
 )
 
